@@ -28,5 +28,12 @@ namespace UrlShortererAPI.Services
 
             return Shorter.Encode(id.Id);
         }
+
+        public async Task<string> GetUrl(string key)
+        {
+            int id = Shorter.Decode(key);
+            var model = await _context.UrlModels.FindAsync(id);
+            return model.FullUrl;
+        }
     }
 }

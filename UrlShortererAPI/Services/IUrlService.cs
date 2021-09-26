@@ -8,5 +8,6 @@ namespace UrlShortererAPI.Services
     public interface IUrlService
     {
         Task<string> AddAsync(Models.UrlModel url, string requestIp);
+        Task<string> GetUrl(string key);
     }
 }

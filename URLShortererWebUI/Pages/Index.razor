@@ -1,0 +1,28 @@
+﻿@page "/"
+@inject IUrlDataAccess urlDataAccess
+
+
+
+<EditForm Model="urlModel" OnValidSubmit="PosttoApi">
+    
+    @if (url is not null)
+    {  
+        <h1>@url</h1>
+    }
+    <h2>Enter any URL for Shorting </h2><br />
+    <InputText @bind-Value="urlModel.UrlAddress" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+@code{
+    private UrlModelBlazor urlModel = new ();
+    public string url = string.Empty;
+
+    private async Task PosttoApi()
+    {
+        url =await urlDataAccess.ShortUrl(urlModel);
+    }
+
+}

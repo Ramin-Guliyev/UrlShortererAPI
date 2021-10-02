@@ -33,6 +33,14 @@ namespace UrlShortererAPI
             );
 
             services.AddControllers();
+
+            services.AddCors(policy => {
+                policy.AddPolicy("Cors", opt =>
+                opt.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin());
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UrlShortererAPI", Version = "v1" });
@@ -50,7 +58,7 @@ namespace UrlShortererAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("Cors");
             app.UseRouting();
 
             app.UseAuthorization();
